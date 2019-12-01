@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">VolleyParsePicasso</string>
+    <string name="edtiTextNombreProducto">Nombre de producto</string>
+    <string name="textViewProvider">Provider</string>
+    <string name="buttonVerMas">Ver</string>
+    <string name="textViewDescription">Descripción del producto</string>
+    <string name="textViewPrice">Precio: </string>
+    <string name="textViewEnvio">+Envio: </string>
+    <string name="url_base">https://www.serverbpw.com/</string>
+</resources>
