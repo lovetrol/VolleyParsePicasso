@@ -54,8 +54,8 @@ public class MainActivity extends AppCompatActivity implements Response.ErrorLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        cardView = (CardView)findViewById(R.id.card_view);
-        imageViewRight = (ImageView)findViewById(R.id.imageViewRight);
+        cardView = findViewById(R.id.card_view);
+        imageViewRight = findViewById(R.id.imageViewRight);
 
         productList = new ArrayList<>();
 
@@ -156,12 +156,13 @@ public class MainActivity extends AppCompatActivity implements Response.ErrorLis
 
 
                             Adaptador adaptador = new Adaptador(MainActivity.this, productList);
-                            recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
+                            recyclerView = findViewById(R.id.recyclerView);
                             recyclerView.setHasFixedSize(true);
                             recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
 
                             recyclerView.setAdapter(adaptador);
 
+                            adaptador.setOnClickListener(MainActivity.this);
 
 
                         } catch (JSONException error) {
@@ -187,10 +188,11 @@ public class MainActivity extends AppCompatActivity implements Response.ErrorLis
     @Override
     public void onItemClick(int position) {
         Intent intent = new Intent(this, ProductView.class);
-        Imagen clickItem = imagenes.get(position);
+        //Imagen clickItem = Imagen.get(position)
+        Productos clickItem = productList.get(position);
         Toast.makeText(MainActivity.this, "aqui", Toast.LENGTH_LONG).show();
 
-        intent.putExtra("imag_url", clickItem.getThumb_url());
+        intent.putExtra("imag", clickItem.getImage());
         startActivity(intent);
     }
 }

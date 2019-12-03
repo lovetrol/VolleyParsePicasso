@@ -7,12 +7,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -32,14 +30,21 @@ public class ProductView extends AppCompatActivity implements Response.ErrorList
         setContentView(R.layout.activity_product_view);
 
         Intent intent = getIntent();
-        String imag_url = intent.getStringExtra("imag_url");
 
-        imageView = findViewById(R.id.imageView);
+        /*El nombre de getStringExtra("imag") debe ser el mismo nombre que que enviamos desde cuando damos click
+        * de input.putExtra("imag") */
+
+        String imag_url = intent.getStringExtra("imag");
+
+        ImageView imageView = findViewById(R.id.imageView);
 
 
         Picasso.get().load(imag_url).into(imageView);
 
-        Bundle bundle = new Bundle();
+
+        //
+
+        /*Bundle bundle = new Bundle();
 
         bundle = getIntent().getExtras();
 
@@ -50,7 +55,9 @@ public class ProductView extends AppCompatActivity implements Response.ErrorList
 
         request = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
 
-        queue.add(request);
+        queue.add(request);*/
+        /*Esta parte es para consumir la descripcion del producto desde url variando el id del final ?id=6541
+        aun no descubro como traerlo de esa forma, variando el id y consumir*/
 
     }
 
@@ -63,11 +70,15 @@ public class ProductView extends AppCompatActivity implements Response.ErrorList
     public void onResponse(JSONObject response) {
         try {
 
+           /* Picasso.get()
+                    .load(getResources().getString(R.string.url_base) + response.getString("imag_url"))
+                    .into(imageView);
+
+                    No entra en esta parte, queria que dar click mostrara el nombre del producto realiacionado al cardview*/
+
             Toast.makeText(ProductView.this, response.getString("name"), Toast.LENGTH_LONG).show();
 
-            Picasso.get()
-                    .load(getResources().getString(R.string.url_base) + response.getString("image"))
-                    .into(imageView);
+
 
 
         } catch (JSONException e) {
