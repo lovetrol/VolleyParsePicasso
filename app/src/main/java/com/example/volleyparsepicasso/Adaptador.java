@@ -19,7 +19,7 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.UsuariosViewHolder
     private List<Productos> productosList;
 
 
-    //por si ocupaba dar click en el cardView o alguna otra posición en el que se pudiera agragar un item
+    //Para poder dar click sobre una CardView
     private OnItemClickListener mListener;
 
 
@@ -39,6 +39,8 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.UsuariosViewHolder
         //Button buttonVer;
         ImageView imageView;
         public ImageView imageViewRight;
+
+
 
 
         public UsuariosViewHolder(View itemView, final OnItemClickListener listener) {

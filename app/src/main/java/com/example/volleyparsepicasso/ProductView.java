@@ -2,15 +2,19 @@ package com.example.volleyparsepicasso;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -19,6 +23,8 @@ import org.json.JSONObject;
 public class ProductView extends AppCompatActivity implements Response.ErrorListener, Response.Listener<JSONObject> {
 
     ImageView imageView;
+    TextView nameDesc, descProduct;
+
 
     String url;
     RequestQueue queue;
@@ -34,32 +40,41 @@ public class ProductView extends AppCompatActivity implements Response.ErrorList
         /*El nombre de getStringExtra("imag") debe ser el mismo nombre que que enviamos desde cuando damos click
         * de input.putExtra("imag") */
 
+
         String imag_url = intent.getStringExtra("imag");
 
         ImageView imageView = findViewById(R.id.imageView);
-
+        nameDesc = findViewById(R.id.textViewNameProduct);
+        descProduct = findViewById(R.id.textViewDescription);
 
         Picasso.get().load(imag_url).into(imageView);
 
 
-        //
-
-        /*Bundle bundle = new Bundle();
+        Bundle bundle = new Bundle();
 
         bundle = getIntent().getExtras();
 
-        final long id = bundle.getLong("ID");
+        final String id = intent.getStringExtra("ID");
+
+
 
         queue = Volley.newRequestQueue(this);
+
         url = getResources().getString(R.string.url_base) + "cm/2020-1/product_detail.php?id=" + id;
 
         request = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
 
-        queue.add(request);*/
+        queue.add(request);
+
+        //propiedad para que el TextView sea scroleable!
+        descProduct.setMovementMethod(new ScrollingMovementMethod());
+
+
         /*Esta parte es para consumir la descripcion del producto desde url variando el id del final ?id=6541
-        aun no descubro como traerlo de esa forma, variando el id y consumir*/
+        */
 
     }
+
 
     @Override
     public void onErrorResponse(VolleyError error) {
@@ -70,14 +85,14 @@ public class ProductView extends AppCompatActivity implements Response.ErrorList
     public void onResponse(JSONObject response) {
         try {
 
-           /* Picasso.get()
-                    .load(getResources().getString(R.string.url_base) + response.getString("imag_url"))
-                    .into(imageView);
 
-                    No entra en esta parte, queria que dar click mostrara el nombre del producto realiacionado al cardview*/
 
             Toast.makeText(ProductView.this, response.getString("name"), Toast.LENGTH_LONG).show();
 
+
+            nameDesc.setText(response.getString("name"));
+
+            descProduct.setText(response.getString("desc"));
 
 
 

@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements Response.ErrorLis
 
     CardView cardView;
 
-
     ArrayList<Imagen> imagenes;
     List<Productos> productList;
 
@@ -40,13 +39,9 @@ public class MainActivity extends AppCompatActivity implements Response.ErrorLis
     Adaptador adaptadorImag;
     ImageView imageViewRight;
 
-
-
     String url;
     RequestQueue queue;
     JsonArrayRequest request;
-
-   // Button buttonVer;
 
 
     @Override
@@ -96,20 +91,12 @@ public class MainActivity extends AppCompatActivity implements Response.ErrorLis
 
                 imagenes.add(imagen);
 
+
             }
 
             Toast.makeText(MainActivity.this, "Prueba", Toast.LENGTH_LONG).show();
 
             AdaptadorImage adaptadorImage = new AdaptadorImage(MainActivity.this,imagenes);
-            //final long id = adaptadorImage.getItemId(1);
-
-            /*imageViewRight.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });*/
-
 
 
 
@@ -118,10 +105,6 @@ public class MainActivity extends AppCompatActivity implements Response.ErrorLis
         }
 
     }
-
-
-
-
 
 
     public void loadUsers() {
@@ -191,8 +174,9 @@ public class MainActivity extends AppCompatActivity implements Response.ErrorLis
         //Imagen clickItem = Imagen.get(position)
         Productos clickItem = productList.get(position);
         Toast.makeText(MainActivity.this, "aqui", Toast.LENGTH_LONG).show();
-
+        intent.putExtra("ID",clickItem.getId());
         intent.putExtra("imag", clickItem.getImage());
+
         startActivity(intent);
     }
 }
